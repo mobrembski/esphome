@@ -37,11 +37,11 @@ template<typename T, T N> class CachedGpioExpander {
   virtual bool digital_read_cache(T pin) = 0;
   /// @brief Call component low level function to write GPIO state to device
   virtual void digital_write_hw(T pin, bool value) = 0;
-  const uint8_t cache_byte_size = N / (sizeof(T) * BITS_PER_BYTE);
+  const uint8_t cache_byte_size_ = N / (sizeof(T) * BITS_PER_BYTE);
 
   /// @brief Invalidate cache. This function should be called in component loop().
   void reset_pin_cache_() {
-    for (T i = 0; i < cache_byte_size; i++) {
+    for (T i = 0; i < cache_byte_size_; i++) {
       this->read_cache_invalidated_[i] = true;
     }
   }
