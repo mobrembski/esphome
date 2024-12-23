@@ -5,8 +5,6 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-#define BITS_PER_BYTE 8
-
 namespace esphome {
 namespace gpio_expander {
 
@@ -48,7 +46,8 @@ template<typename T, T N> class CachedGpioExpander {
     }
   }
 
-  std::array<bool, N / (sizeof(T) * 8)> read_cache_invalidated_{};
+  static const uint8_t BITS_PER_BYTE = 8;
+  std::array<bool, N / (sizeof(T) * BITS_PER_BYTE)> read_cache_invalidated_{};
 };
 
 }  // namespace gpio_expander
