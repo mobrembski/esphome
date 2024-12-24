@@ -19,7 +19,7 @@ namespace gpio_expander {
 template<typename T, T N> class CachedGpioExpander {
  public:
   bool digital_read(T pin) {
-    uint8_t bank = pin / (sizeof(uint8_t) * BITS_PER_BYTE);
+    uint8_t bank = pin / (sizeof(T) * BITS_PER_BYTE);
     if (this->read_cache_invalidated_[bank]) {
       this->read_cache_invalidated_[bank] = false;
       if (!this->digital_read_hw(pin))
